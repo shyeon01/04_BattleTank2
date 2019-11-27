@@ -8,3 +8,4 @@ Make again 'cause some error at previous 04_BattleTank(C++ Classes folder not ex
 ## Lecture List
 * BT01 Intro, Notes & Assets
 * BT02 Game Design Document (GDD)
+* BT03 Setting Up a GitHub "Repo"
