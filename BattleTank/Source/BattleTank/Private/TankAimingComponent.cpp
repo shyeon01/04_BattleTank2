@@ -47,7 +47,7 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
     
     if (!Barrel) { return; }
-
+    
     FVector OutLaunchVelocity;
     FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
     bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
@@ -60,14 +60,18 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
         false,
         0,
         0,
-        ESuggestProjVelocityTraceOption::DoNotTrace
-     );
-    
-    if(bHaveAimSolution)
+        ESuggestProjVelocityTraceOption::DoNotTrace // Paramater must be present to prevent bug
+//        FCollisionResponseParams::DefaultResponseParam,
+//        TArray<AActor*>(),
+//        true
+    );
+
+    if (bHaveAimSolution)
     {
         auto AimDirection = OutLaunchVelocity.GetSafeNormal();
         MoveBarrelTowards(AimDirection);
     }
+    // If no solution found do nothing
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
