@@ -20,8 +20,13 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 protected:
     UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
     void FoundAimingComponent(UTankAimingComponent* AimCompRef);
+    
+    UFUNCTION()
+    void OnPossedTankDeath();
 	
 private:
+    virtual void SetPawn(APawn* InPawn) override;
+    
     virtual void BeginPlay() override;
     
     // Called every frame

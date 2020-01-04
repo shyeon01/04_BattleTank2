@@ -8,7 +8,9 @@ UTankTrack::UTankTrack() {
 }
 
 void UTankTrack::BeginPlay() {
+    Super::BeginPlay();
     OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+//    UE_LOG(LogTemp, Warning, TEXT("BeginPlay"));
 }
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) {
@@ -17,6 +19,7 @@ void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UP
     DriveTrack();
     ApplySidewaysForce();
     CurrentThrottle = 0;
+//    UE_LOG(LogTemp, Warning, TEXT("OnHit"));
 }
 
 void UTankTrack::ApplySidewaysForce() {
@@ -33,6 +36,7 @@ void UTankTrack::ApplySidewaysForce() {
 
 void UTankTrack::SetThrottle(float Throttle) {
     CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
+//    UE_LOG(LogTemp, Warning, TEXT("SetThrottle"));
 }
 
 void UTankTrack::DriveTrack() {
@@ -40,6 +44,7 @@ void UTankTrack::DriveTrack() {
     auto ForceLocation = GetComponentLocation();
     auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
     TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+//    UE_LOG(LogTemp, Warning, TEXT("DriveTrack"));
 }
 
 

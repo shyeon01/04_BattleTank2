@@ -43,7 +43,7 @@ EFiringState UTankAimingComponent::GetFiringState() const {
 bool UTankAimingComponent::IsBarrelMoving() {
     if(!ensure(Barrel)) { return false; }
     auto BarrelForward = Barrel->GetForwardVector();
-    return !BarrelForward.Equals(AimDirection, 0.01);
+    return !BarrelForward.Equals(AimDirection, 0.1);
 }
 
 // Called when the game starts
@@ -95,6 +95,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     
     // Always yaw the shortest way
     Barrel->Elevate(DeltaRotator.Pitch);
+    
     if(FMath::Abs(DeltaRotator.Yaw) < 180){
         Turret->Rotate(DeltaRotator.Yaw);
     } else { // Avoid going the long-way round
