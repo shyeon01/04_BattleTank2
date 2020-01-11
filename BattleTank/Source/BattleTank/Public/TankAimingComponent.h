@@ -59,8 +59,8 @@ private:
     UTankBarrel* Barrel = nullptr;
     UTankTurret* Turret = nullptr;
     
-    UPROPERTY(EditAnywhere, Category = "Setup")
-    TSubclassOf<AProjectile> ProjectileBlueprint; // Alternative
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    TSubclassOf<AProjectile> ProjectileBlueprint;
     
     UPROPERTY(EditAnywhere, Category = "Firing")
     float LaunchSpeed = 4000;
